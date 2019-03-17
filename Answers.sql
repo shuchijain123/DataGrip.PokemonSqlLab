@@ -53,15 +53,19 @@ Directions: Write a query that returns the following collumns:
 
 Pokemon Name	Trainer Name	Level	Primary Type	Secondary Type
 Pokemon's name	Trainer's name	Current Level	Primary Type Name	Secondary Type Name
-USING pokemon SPEED as strongest criteria for Trainer as my sorting order
+USING pokemon level as strongest criteria for Trainer as my sorting order
 
 */
 
-select distinct * from (select p.name as Pokemon_Name, t.trainername as Trainer_Name, pt.pokelevel as Level, p.primary_type as Primary_Type, p.secondary_type as Secondary_Type
 
-from pokemons p JOIN pokemon_trainer pt  on p.id = pt.pokemon_id JOIN trainers t on pt.trainerID = t.trainerID order by pt.speed desc)as t;
+select distinct * from (
+  select p.name  as Pokemon_Name, t.trainername as Trainer_Name, pt.pokelevel as Level,
+         p.primary_type as Primary_Type, p.secondary_type as Secondary_Type
 
-
+from pokemons p
+  JOIN pokemon_trainer pt  on p.id = pt.pokemon_id
+  JOIN trainers t on pt.trainerID = t.trainerID) as t
+order by t.Level desc;
 
 
 
